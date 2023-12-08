@@ -183,3 +183,16 @@ typedef struct
 } channel_t;
 
 #endif
+
+
+extern "C" {
+
+void date2gps(const datetime_t *t, gpstime_t *g);
+void llh2xyz(const double *llh, double *xyz);
+int readRinexNavAll(ephem_t eph[][MAX_SAT], ionoutc_t *ionoutc, const char *fname);
+double subGpsTime(gpstime_t g1, gpstime_t g0);
+gpstime_t incGpsTime(gpstime_t g0, double dt);
+void gps2date(const gpstime_t *g, datetime_t *t);
+
+}
+
