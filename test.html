@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Emscripten</title>
+        <body>
+            <script type="module">
+                import SDRSim from "./gps-sdr-sim.js";
+                const module = await SDRSim();
+                module._staticMode(22.561092, 113.889375, 10, 0, 0.0, 8, 2600000, false);
+            </script>
+        </body>
+    </head>
+</html>

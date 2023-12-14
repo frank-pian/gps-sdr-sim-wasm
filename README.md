@@ -1,3 +1,7 @@
+#GPS-SDR-SIM-WASM
+
+emcc wasm.cpp gpssim.c -lm -s MODULARIZE -s EXPORT_NAME='SDRSim' -s ALLOW_MEMORY_GROWTH=1 -s EXPORT_ES6 -s STACK_SIZE=5MB -s EXPORTED_RUNTIME_METHODS=['FS'] -o gps-sdr-sim.js --preload-file brdc
+
 # GPS-SDR-SIM
 
 GPS-SDR-SIM generates GPS baseband signal data streams, which can be converted 

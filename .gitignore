@@ -47,3 +47,4 @@ nbproject/*
 gps-sdr-sim.wasm
 gps-sdr-sim.js
 .vscode/*
+gps-sdr-sim.data
