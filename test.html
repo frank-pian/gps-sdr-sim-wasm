@@ -5,9 +5,29 @@
         <title>Emscripten</title>
         <body>
             <script type="module">
-                import SDRSim from "./gps-sdr-sim.js";
-                const module = await SDRSim();
-                module._staticMode(22.561092, 113.889375, 10, 0, 0.0, 8, 2600000, false);
+                
+                //module._staticMode(22.561092, 113.889375, 10, 0, 0.0, 8, 2600000, false);
+                const worker = new Worker("work.js");
+                worker.onmessage = (e) => {
+                    const message = e.data;
+                    switch(message.type) {
+                        case 'progress':
+                            console.log(message.data);
+                            break;
+                        case 'file':
+                            const a = document.createElement('a');
+                            a.href = message.data;
+                            a.download = 'gps.bin'; // 设置下载文件名
+                            document.body.appendChild(a);
+                            a.click();
+
+                            // 清理
+                            window.URL.revokeObjectURL(url);
+                            document.body.removeChild(a);
+                            break;
+                    }
+                }
+                worker.postMessage("run");
             </script>
         </body>
     </head>

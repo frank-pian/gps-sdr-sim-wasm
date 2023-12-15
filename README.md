@@ -1,6 +1,6 @@
-#GPS-SDR-SIM-WASM
+# GPS-SDR-SIM-WASM
 
-emcc wasm.cpp gpssim.c -lm -s MODULARIZE -s EXPORT_NAME='SDRSim' -s ALLOW_MEMORY_GROWTH=1 -s EXPORT_ES6 -s STACK_SIZE=5MB -s EXPORTED_RUNTIME_METHODS=['FS'] -o gps-sdr-sim.js --preload-file brdc
+emcc wasm.cpp gpssim.c -O3 -lm -s MODULARIZE -s EXPORT_NAME='SDRSim' -s ALLOW_MEMORY_GROWTH=1 -s STACK_SIZE=5MB -s EXPORTED_RUNTIME_METHODS=['FS'] -s ENVIRONMENT='worker' -o gps-sdr-sim.js --preload-file brdc
 
 # GPS-SDR-SIM
 

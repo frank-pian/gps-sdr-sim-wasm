@@ -15,6 +15,12 @@
 #endif
 #endif
 
+EM_JS(void, sendProgress, (double percent), {
+	if (Module.exportProgress != undefined && Module.exportProgress != null){
+		Module.exportProgress(percent);
+	}
+});
+
 #include "gpssim.h"
 #include <time.h>
 #include <iostream>
@@ -45,6 +51,7 @@ bool readEphemeris(gpstime_t &g0, datetime_t &t0, bool timeoverwrite, int &numd,
 	clock_t tend;
 	char outfile[MAX_CHAR];
 	strcpy(outfile, "gpssim.bin");
+	double per;
 
 	// Buffer size
 	samp_freq = floor(samp_freq / 10.0);
@@ -490,7 +497,9 @@ bool readEphemeris(gpstime_t &g0, datetime_t &t0, bool timeoverwrite, int &numd,
 		grx = incGpsTime(grx, 0.1);
 
 		// Update time counter
-		fprintf(stderr, "\rTime into run = %4.1f", subGpsTime(grx, g0));
+		double d_numd = numd;
+		sendProgress(iumd/d_numd);
+		// fprintf(stderr, "\rTime into run = %4.1f", subGpsTime(grx, g0));
 		fflush(stdout);
 	}
 
